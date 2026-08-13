@@ -1,12 +1,9 @@
 package pages;
 
-import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
 
 public class LoginPage {
 
@@ -21,18 +18,7 @@ public class LoginPage {
     private final SelenideElement backToLoginLink = $("a.mira-page-forgot-password-link");
     private final SelenideElement forgotPasswordField = $("input[name='loginOrEmail']");
 
-    //  УПРАВЛЕНИЕ БРАУЗЕРОМ 
-    public static void openPage(String browser, String resolution) {
-        Configuration.browser = browser;
-        Configuration.browserSize = resolution;
-        open(URL);
-    }
-
-    public static void closeBrowser() {
-        Selenide.closeWebDriver();
-    }
-
-    // ДЕЙСТВИЯ 
+    // ДЕЙСТВИЯ
     public void enterLogin(String login) {
         loginInput.setValue(login);
     }

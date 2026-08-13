@@ -1,6 +1,7 @@
 package tests;
 
 import com.codeborne.selenide.Selenide;
+import config.BrowserManager;
 import config.TestConfig;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
@@ -56,7 +57,7 @@ public class LoginTest {
 
     @AfterEach
     public void tearDown() {
-        LoginPage.closeBrowser();
+        BrowserManager.close();
     }
 
     //  ТЕСТЫ 
@@ -65,7 +66,7 @@ public class LoginTest {
     @MethodSource("browserResolutionProvider")
     @DisplayName("{0} {1} — проверка загрузки")
     public void loginPageShouldBeVisible(String browser, String resolution) {
-        LoginPage.openPage(browser, resolution);
+        BrowserManager.open(LoginPage.URL, browser, resolution);
         LoginPage page = new LoginPage();
         page.shouldDisplayLoginButton();
     }
@@ -74,7 +75,7 @@ public class LoginTest {
     @MethodSource("browserResolutionProvider")
     @DisplayName("{0} {1} — успешный вход")
     public void successfulLoginTest(String browser, String resolution) {
-        LoginPage.openPage(browser, resolution);
+        BrowserManager.open(LoginPage.URL, browser, resolution);
         LoginPage page = new LoginPage();
         page.login(TestConfig.getTestLogin(), TestConfig.getTestPassword());
         page.shouldBeLoggedIn();
@@ -84,7 +85,7 @@ public class LoginTest {
     @MethodSource("browserResolutionProvider")
     @DisplayName("{0} {1} — переход на страницу восстановления")
     public void forgotPasswordLinkTest(String browser, String resolution) {
-        LoginPage.openPage(browser, resolution);
+        BrowserManager.open(LoginPage.URL, browser, resolution);
         LoginPage page = new LoginPage();
         page.clickForgotPasswordLink();
         page.shouldDisplayForgotPasswordForm();
@@ -94,7 +95,7 @@ public class LoginTest {
     @MethodSource("browserResolutionProvider")
     @DisplayName("{0} {1} — возврат на страницу логина")
     public void backToLoginLinkTest(String browser, String resolution) {
-        LoginPage.openPage(browser, resolution);
+        BrowserManager.open(LoginPage.URL, browser, resolution);
         LoginPage page = new LoginPage();
         page.clickForgotPasswordLink();
         page.clickBackToLoginLink();
@@ -106,7 +107,7 @@ public class LoginTest {
     @DisplayName("{0} {1} — {2}")
     public void negativeLoginTest(String browser, String resolution, String description,
                                   String login, String password) {
-        LoginPage.openPage(browser, resolution);
+        BrowserManager.open(LoginPage.URL, browser, resolution);
         LoginPage page = new LoginPage();
         page.login(login, password);
 
@@ -123,7 +124,7 @@ public class LoginTest {
     @MethodSource("browserResolutionProvider")
     @DisplayName("{0} {1} — восстановление после ошибки")
     public void recoveryAfterErrorTest(String browser, String resolution) {
-        LoginPage.openPage(browser, resolution);
+        BrowserManager.open(LoginPage.URL, browser, resolution);
         LoginPage page = new LoginPage();
         page.login("wrongLogin", "wrongPassword");
 
