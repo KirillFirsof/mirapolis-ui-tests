@@ -1,0 +1,35 @@
+# Java
+*.class
+*.log
+*.jar
+*.war
+*.ear
+target/
+build/
+!.mvn/wrapper/maven-wrapper.jar
+
+# Gradle
+.gradle/
+gradle-app.setting
+gradlew
+gradlew.bat
+!gradle-wrapper.jar
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.settings/
+.project
+.classpath
+*.iws
+*.ipr
+*.swp
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Application
+application-local.properties
