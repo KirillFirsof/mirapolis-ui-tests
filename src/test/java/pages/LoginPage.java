@@ -4,6 +4,7 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
@@ -58,16 +59,16 @@ public class LoginPage {
         backToLoginLink.click();
     }
 
-    //  ПРОВЕРКИ 
-    public boolean isUserLoggedIn() {
-        return userWidget.isDisplayed();
+    //  ПРОВЕРКИ
+    public void shouldDisplayLoginButton() {
+        loginButton.shouldBe(visible);
     }
 
-    public boolean isForgotPasswordFormDisplayed() {
-        return forgotPasswordField.isDisplayed();
+    public void shouldBeLoggedIn() {
+        userWidget.shouldBe(visible);
     }
 
-    public boolean isLoginButtonDisplayed() {
-        return loginButton.isDisplayed();
+    public void shouldDisplayForgotPasswordForm() {
+        forgotPasswordField.shouldBe(visible);
     }
 }

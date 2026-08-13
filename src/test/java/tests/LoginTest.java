@@ -24,7 +24,7 @@ public class LoginTest {
     // Негативные сценарии
     static Stream<Arguments> negativeScenarios() {
         return Stream.of(
-            Arguments.of("пустой и логин и пароль", TestConfig.getTestLogin(), ""),
+            Arguments.of("пустой логин и пароль", "", ""),
             Arguments.of("пустой пароль", TestConfig.getTestLogin(), ""),
             Arguments.of("пустой логин", "", TestConfig.getTestPassword()),
             Arguments.of("неправильный логин", "wrongLogin", TestConfig.getTestPassword()),
@@ -67,7 +67,7 @@ public class LoginTest {
     public void loginPageShouldBeVisible(String browser, String resolution) {
         LoginPage.openPage(browser, resolution);
         LoginPage page = new LoginPage();
-        page.isLoginButtonDisplayed();
+        page.shouldDisplayLoginButton();
     }
 
     @ParameterizedTest
@@ -77,7 +77,7 @@ public class LoginTest {
         LoginPage.openPage(browser, resolution);
         LoginPage page = new LoginPage();
         page.login(TestConfig.getTestLogin(), TestConfig.getTestPassword());
-        page.isUserLoggedIn();
+        page.shouldBeLoggedIn();
     }
 
     @ParameterizedTest
@@ -87,7 +87,7 @@ public class LoginTest {
         LoginPage.openPage(browser, resolution);
         LoginPage page = new LoginPage();
         page.clickForgotPasswordLink();
-        page.isForgotPasswordFormDisplayed();
+        page.shouldDisplayForgotPasswordForm();
     }
 
     @ParameterizedTest
@@ -98,7 +98,7 @@ public class LoginTest {
         LoginPage page = new LoginPage();
         page.clickForgotPasswordLink();
         page.clickBackToLoginLink();
-        page.isLoginButtonDisplayed();
+        page.shouldDisplayLoginButton();
     }
 
     @ParameterizedTest
@@ -137,6 +137,6 @@ public class LoginTest {
             }
         });
 
-        page.isLoginButtonDisplayed();
+        page.shouldDisplayLoginButton();
     }
 }
