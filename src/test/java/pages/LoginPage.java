@@ -1,6 +1,7 @@
 package pages;
 
 import com.codeborne.selenide.SelenideElement;
+import config.BrowserManager;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
@@ -17,6 +18,14 @@ public class LoginPage {
     private final SelenideElement forgotPasswordLink = $("a.mira-default-login-page-link");
     private final SelenideElement backToLoginLink = $("a.mira-page-forgot-password-link");
     private final SelenideElement forgotPasswordField = $("input[name='loginOrEmail']");
+
+    public static void open(String browser, String resolution) {
+        BrowserManager.open(URL, browser, resolution);
+    }
+
+    public static void close() {
+        BrowserManager.close();
+    }
 
     // ДЕЙСТВИЯ
     public void enterLogin(String login) {
