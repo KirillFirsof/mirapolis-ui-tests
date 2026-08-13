@@ -1,0 +1,73 @@
+package pages;
+
+import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.SelenideElement;
+
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
+
+public class LoginPage {
+
+    public static final String URL = "https://qa.copy.mirapolis.ru/mira";
+
+    // Локаторы
+    private final SelenideElement loginInput = $("[name='user']");
+    private final SelenideElement passwordInput = $("[name='password']");
+    private final SelenideElement loginButton = $("#button_submit_login_form");
+    private final SelenideElement userWidget = $(".user_info_widget.is-logged");
+    private final SelenideElement forgotPasswordLink = $("a.mira-default-login-page-link");
+    private final SelenideElement backToLoginLink = $("a.mira-page-forgot-password-link");
+    private final SelenideElement forgotPasswordField = $("input[name='loginOrEmail']");
+
+    //  УПРАВЛЕНИЕ БРАУЗЕРОМ 
+    public static void openPage(String browser, String resolution) {
+        Configuration.browser = browser;
+        Configuration.browserSize = resolution;
+        open(URL);
+    }
+
+    public static void closeBrowser() {
+        Selenide.closeWebDriver();
+    }
+
+    // ДЕЙСТВИЯ 
+    public void enterLogin(String login) {
+        loginInput.setValue(login);
+    }
+
+    public void enterPassword(String password) {
+        passwordInput.setValue(password);
+    }
+
+    public void clickLoginButton() {
+        loginButton.click();
+    }
+
+    public void login(String login, String password) {
+        enterLogin(login);
+        enterPassword(password);
+        clickLoginButton();
+    }
+
+    public void clickForgotPasswordLink() {
+        forgotPasswordLink.click();
+    }
+
+    public void clickBackToLoginLink() {
+        backToLoginLink.click();
+    }
+
+    //  ПРОВЕРКИ 
+    public boolean isUserLoggedIn() {
+        return userWidget.isDisplayed();
+    }
+
+    public boolean isForgotPasswordFormDisplayed() {
+        return forgotPasswordField.isDisplayed();
+    }
+
+    public boolean isLoginButtonDisplayed() {
+        return loginButton.isDisplayed();
+    }
+}
