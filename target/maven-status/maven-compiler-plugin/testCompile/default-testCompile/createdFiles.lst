@@ -1,0 +1,3 @@
+config\TestConfig.class
+tests\BrowserManager.class
+tests\LoginTest.class
